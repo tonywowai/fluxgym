@@ -37,3 +37,4 @@ slugify
 easygui
 argparse
 pytorch-lightning==1.9.0
+triton==3.1.0
