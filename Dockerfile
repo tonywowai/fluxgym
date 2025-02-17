@@ -31,7 +31,7 @@ RUN pip install --no-cache-dir -r ./requirements.txt
 # Install Torch, Torchvision, and Torchaudio for CUDA 12.2
 RUN pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu122/torch_stable.html
 
-RUN chown -R appuser:appuser /app
+# RUN chown -R appuser:appuser /app
 
 # delete redundant requirements.txt and sd-scripts directory within the container
 RUN rm -r ./sd-scripts
@@ -48,9 +48,9 @@ EXPOSE 7860
 ENV GRADIO_SERVER_NAME="0.0.0.0"
 
 WORKDIR /app/fluxgym
-# RUN chmod 777 /app/fluxgym/models
-# RUN chmod 777 /app/fluxgym/datasets
-# RUN chmod 777 /app/fluxgym/outputs
+RUN chmod 777 /app/fluxgym/models
+RUN chmod 777 /app/fluxgym/datasets
+RUN chmod 777 /app/fluxgym/outputs
 
 # Run fluxgym Python application
 CMD ["python3", "./app.py"]
