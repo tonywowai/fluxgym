@@ -30,3 +30,5 @@ pytorch-lightning==1.9.0
 tensorboard
 easygui==0.98.3
 toml==0.10.2
+gradio_logsview@https://huggingface.co/spaces/cocktailpeanut/gradio_logsview/resolve/main/gradio_logsview-0.0.17-py3-none-any.whl
+
