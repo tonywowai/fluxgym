@@ -36,7 +36,7 @@ RUN chown -R appuser:appuser /app
 # delete redundant requirements.txt and sd-scripts directory within the container
 RUN rm -r ./sd-scripts
 RUN rm ./requirements.txt
-
+RUN pip install --force-reinstall -v "triton==3.1.0"
 #Run application as non-root
 USER appuser
 
