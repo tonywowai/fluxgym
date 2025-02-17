@@ -11,7 +11,7 @@ from typing import Any, List
 import toml
 
 from tqdm import tqdm
-from comfy.utils import ProgressBar
+# from comfy.utils import ProgressBar
 
 import torch
 from .library.device_utils import init_ipex, clean_memory_on_device
@@ -333,7 +333,7 @@ class NetworkTrainer:
         latents_caching_strategy = self.get_latents_caching_strategy(args)
         strategy_base.LatentsCachingStrategy.set_strategy(latents_caching_strategy)
 
-        pbar = ProgressBar(5)
+        # pbar = ProgressBar(5)
 
         # Prepare the dataset
         if args.dataset_class is None:
@@ -418,7 +418,7 @@ class NetworkTrainer:
         # text_encoder is List[CLIPTextModel] or CLIPTextModel
         text_encoders = text_encoder if isinstance(text_encoder, list) else [text_encoder]
 
-        pbar.update(1)
+        # pbar.update(1)
 
         # Load the model for incremental learning
         #sys.path.append(os.path.dirname(__file__))
@@ -464,7 +464,7 @@ class NetworkTrainer:
             strategy_base.TextEncoderOutputsCachingStrategy.set_strategy(text_encoder_outputs_caching_strategy)
         self.cache_text_encoder_outputs_if_needed(args, accelerator, unet, vae, text_encoders, train_dataset_group, weight_dtype)
 
-        pbar.update(1)
+        # pbar.update(1)
 
         # prepare network
         net_kwargs = {}
@@ -716,7 +716,7 @@ class NetworkTrainer:
         if args.full_fp16:
             train_util.patch_accelerator_for_fp16_training(accelerator)
 
-        pbar.update(1)
+        # pbar.update(1)
 
         # before resuming make hook for saving/loading to save/load the network weights only
         def save_model_hook(models, weights, output_dir):
@@ -766,7 +766,7 @@ class NetworkTrainer:
         # resume from local or huggingface
         train_util.resume_from_local_or_hf_if_specified(accelerator, args)
 
-        pbar.update(1)
+        # pbar.update(1)
 
         # Calculate the number of epochs
         num_update_steps_per_epoch = math.ceil(len(train_dataloader) / args.gradient_accumulation_steps)
@@ -1071,7 +1071,7 @@ class NetworkTrainer:
         self.loss_recorder = train_util.LossRecorder()
         del train_dataset_group
 
-        pbar.update(1)
+        # pbar.update(1)
 
         # callback for step start
         if hasattr(accelerator.unwrap_model(network), "on_step_start"):
@@ -1148,7 +1148,7 @@ class NetworkTrainer:
         self.lr_scheduler = lr_scheduler
         self.save_model = save_model
         self.remove_model = remove_model
-        self.comfy_pbar = None
+        # self.comfy_pbar = None
         
         progress_bar = tqdm(range(args.max_train_steps - initial_step), smoothing=0, disable=False, desc="steps")
         
@@ -1315,7 +1315,7 @@ class NetworkTrainer:
                 if self.global_step >= break_at_steps:
                     break
                 steps_done += 1
-                self.comfy_pbar.update(1)
+                # self.comfy_pbar.update(1)
 
             if len(accelerator.trackers) > 0:
                 logs = {"loss/epoch": self.loss_recorder.moving_average}
