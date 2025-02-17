@@ -48,6 +48,8 @@ EXPOSE 7860
 ENV GRADIO_SERVER_NAME="0.0.0.0"
 
 WORKDIR /app/fluxgym
+RUN chmod -R 775  /app/fluxgym/models
+RUN chmod -R 775  /app/fluxgym/datasets
 
 # Run fluxgym Python application
 CMD ["python3", "./app.py"]
