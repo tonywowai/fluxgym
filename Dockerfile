@@ -9,13 +9,13 @@ RUN apt-get update -y && apt-get install -y \
     build-essential  # Install dependencies for building extensions
 
 # Define environment variables for UID and GID and local timezone
-ENV PUID=${PUID:-1000}
-ENV PGID=${PGID:-1000}
+# ENV PUID=${PUID:-1000}
+# ENV PGID=${PGID:-1000}
 
 # Create a group with the specified GID
-RUN groupadd -g "${PGID}" appuser
+# RUN groupadd -g "${PGID}" appuser
 # Create a user with the specified UID and GID
-RUN useradd -m -s /bin/sh -u "${PUID}" -g "${PGID}" appuser
+# RUN useradd -m -s /bin/sh -u "${PUID}" -g "${PGID}" appuser
 
 WORKDIR /app
 
@@ -38,7 +38,7 @@ RUN rm -r ./sd-scripts
 RUN rm ./requirements.txt
 RUN pip install --force-reinstall -v "triton==3.1.0"
 #Run application as non-root
-USER appuser
+# USER appuser
 
 # Copy fluxgym application code
 COPY . ./fluxgym
