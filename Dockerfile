@@ -49,9 +49,5 @@ ENV GRADIO_SERVER_NAME="0.0.0.0"
 
 WORKDIR /app/fluxgym
 
-RUN chmod ug+rwx /app/fluxgym/datasets
-RUN chmod ug+rwx /app/fluxgym/models
-RUN chmod ug+rwx /app/fluxgym/outputs
-
 # Run fluxgym Python application
 CMD ["python3", "./app.py"]
